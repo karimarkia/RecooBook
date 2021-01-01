@@ -1,13 +1,12 @@
 const initialState = {
-books : "hi"
+  book: 'karim',
 }
 
-export default (state = initialState, { type, payload }) => {
-    switch (type) {
-
-  
-
+const booksReducer = (state = initialState, action) => {
+  switch (action.type) {
     default:
-        return state
-    }
+      return state
+  }
 }
+
+export default booksReducer
