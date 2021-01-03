@@ -5,7 +5,7 @@ const auth = (req, res, next) => {
   User.findByToken(token, (err, user) => {
     if (err) throw err
     if (!user) res.send(false)
-
+    
     req.token = token
     req.user = user
     next()

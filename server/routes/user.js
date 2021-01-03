@@ -22,7 +22,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
   User.findOne({ email: req.body.email }, (err, user) => {
     if (!user)
-      return res.status(401).json({
+      return res.json({
         auth: false,
         message: 'Login fail, please check your email or passowrd',
         userData: false,
@@ -41,6 +41,12 @@ router.post('/login', (req, res) => {
         if (err) return res.status(401).send(err)
         res.cookie('auth', user.token).json({
           auth: true,
+          userData: {
+            id: user._id,
+            email: user.email,
+            firstname: user.firstname,
+            lastname: user.lastname,
+          },
         })
       })
     })

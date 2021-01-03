@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+import { useSelector, useDispatch } from 'react-redux'
+import { loginUser } from '../../store/actions/usersAction'
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string().min(6, 'Too Short password !').required('Required !'),
@@ -8,8 +11,17 @@ const LoginSchema = Yup.object().shape({
 })
 
 const Login = () => {
-  const [success, setSuccess] = useState(false)
-  const [validation, setValidation] = useState(false)
+  // const [success, setSuccess] = useState(false)
+  // const [validation, setValidation] = useState(false)
+  let history = useHistory()
+  const auth = useSelector((state) => state.usersReducer.auth)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (auth) {
+      history.push('/admin')
+    }
+  }, [auth])
 
   return (
     <div className="container form_container">
@@ -17,10 +29,10 @@ const Login = () => {
       <hr />
       <h4>Sign in here </h4>
       <Formik
-        initialValues={{ email: 'Karim@gmail.com', password: 'karim123' }}
+        initialValues={{ email: 'karim1@gmail.com', password: '1234567' }}
         validationSchema={LoginSchema}
         onSubmit={(values) => {
-          console.log(values)
+          dispatch(loginUser(values))
         }}
       >
         {({
@@ -63,9 +75,13 @@ const Login = () => {
                 ) : null}
               </div>
             </div>
-            <button type="submit" disabled={isSubmitting}>
-              Login
-            </button>
+            <button type="submit">Login</button>
+            <br />
+            {/* {!auth ? null : (
+              <div className="error_label">
+                Something Wrong, please try again
+              </div>
+            )} */}
           </form>
         )}
       </Formik>
