@@ -5,12 +5,14 @@ import Login from './components/Users/Login'
 import PrivateRoute from './components/HOC/PrivateRoute'
 import Admin from './components/Users/Admin/Admin'
 import Logout from './components/Users/Logout'
+import AddPost from './components/Users/Admin/Posts/AddPost'
 
 const App = () => {
   return (
     <Router>
       <Header />
       <Switch>
+        <PrivateRoute path="/admin/posts/create" component={AddPost} exact />
         <PrivateRoute path="/admin" component={Admin} exact />
         <PrivateRoute path="/logout" component={Logout} exact />
         <PrivateRoute path="/login" component={Login} exact />
