@@ -186,7 +186,7 @@ const AddPost = () => {
             {success ? (
               <div className="succes_entry">
                 <div>Congrats for posting your book !</div>
-                <Link to={`/article/${book.add.bookId}`}>See your book</Link>
+                <Link to={`/admin/posts/edit/${book.add.bookId}`}>See your book</Link>
               </div>
             ) : null}
           </form>

@@ -2,7 +2,7 @@
 //   add
 // }
 
-import { ADD_BOOK, CLEAR_BOOK } from '../types'
+import { ADD_BOOK, CLEAR_BOOK, GET_BOOK } from '../types'
 
 const booksReducer = (state = {}, action) => {
   switch (action.type) {
@@ -15,6 +15,11 @@ const booksReducer = (state = {}, action) => {
       return {
         ...state,
         add: action.payload,
+      }
+    case GET_BOOK:
+      return {
+        ...state,
+        book: action.payload,
       }
 
     default:

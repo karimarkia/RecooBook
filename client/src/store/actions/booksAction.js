@@ -1,4 +1,4 @@
-import { ADD_BOOK,CLEAR_BOOK } from '../types'
+import { ADD_BOOK,CLEAR_BOOK, GET_BOOK } from '../types'
 import axios from 'axios'
 
 export const addBook = book => async (dispatch) => {
@@ -17,4 +17,10 @@ export const clearBook = book => async (dispatch) => {
   })
 }
 
-
+export const getBook = id =>async dispatch => {
+  const response = await axios.get(`/api/books/book?id=${id}`)
+  dispatch({
+    type:GET_BOOK,
+    payload:response.data
+  })
+}

@@ -4,10 +4,12 @@ import { authUser } from '../../store/actions/usersAction'
 import { useHistory } from 'react-router-dom'
 
 const PrivateRoute = ({ component: Component }, props) => {
+  console.log(props);
 
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
   let history = useHistory()
+  
 
   const user = useSelector((state) => state.usersReducer.auth)
   console.log(user,'user');
